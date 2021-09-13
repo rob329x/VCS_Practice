@@ -5,6 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Login_Test {
 
@@ -15,14 +20,44 @@ public class Login_Test {
         return driver;
     }
 
-    public static void main(String[] args) {
+    public static String getEmail(Scanner myScanner){
+        System.out.println("Enter email");
+        String email = myScanner.nextLine();  // Read user email
+        System.out.println("Email is: " + email);  // Output user email
+
+        return email;
+    }
+
+    public static String getPassword(Scanner myScanner){
+        System.out.println("Enter password");
+        String password = myScanner.nextLine(); // Read user password
+        System.out.println("Password is: " + password);  // Output user password
+
+        return password;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+
+        Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
+        String email = getEmail(myScanner);
+        String password = getPassword(myScanner);
+
+
         WebDriver driver = createDriver();
 
-        driver.get("https://www.google.com/");
+        /* Login on Foodee.com */
+        driver.get("https://app.food.ee/login");
 
-        WebElement name = driver.findElement(By.name("q"));
-        name.click();
-        name.sendKeys("Robert");
-        driver.quit();
+        WebElement emailInput = driver.findElement(By.id("ember11"));
+        emailInput.click();
+        emailInput.sendKeys(email);
+
+        WebElement passwordInput = driver.findElement(By.id("ember14"));
+        passwordInput.click();
+        passwordInput.sendKeys(password);
+
+        WebElement Login = driver.findElement(By.className("fde-floating-box_submit"));
+        Login.click();
+
     }
 }
