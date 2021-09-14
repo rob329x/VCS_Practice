@@ -59,5 +59,12 @@ public class Login_Test {
         WebElement Login = driver.findElement(By.className("fde-floating-box_submit"));
         Login.click();
 
+        WebDriverWait block = new WebDriverWait(driver,10); //Wait for next page to load and navigate ot the profile section
+        block.until(ExpectedConditions.visibilityOfElementLocated(By.id("ember112")));
+
+        WebElement profile = driver.findElement(By.id("ember112"));
+        profile.click();
+
+        driver.quit();
     }
 }
