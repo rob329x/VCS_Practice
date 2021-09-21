@@ -4,28 +4,35 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class FoodieLoginPage {
+public class FoodieLoginPage extends BasePage{
 
-  private WebDriver driver;
+  private static final By EMAIL_INPUT_FIELD = By.id("ember11");
+  private static final By PASSWORD_INPUT_FIELD = By.id("ember14");
+  private static final By LOGIN_BUTTON = By.className("fde-floating-box_submit");
+
 
   public FoodieLoginPage(WebDriver driver) {
-    this.driver = driver;
+    super(driver);
+  }
+
+  public FoodieLoginPage go() {
+    /* Login on Foodee.com */
+    getWebDriver().get("https://app.food.ee/login");
+    return new FoodieLoginPage(getWebDriver());
   }
 
   public TheNewPage login(String email, String password) {
-    /* Login on Foodee.com */
-    driver.get("https://app.food.ee/login");
+    enterText(EMAIL_INPUT_FIELD, email);
+    enterText(PASSWORD_INPUT_FIELD, password);
+    clickLoginButton();
 
-    WebElement emailInput = driver.findElement(By.id("ember11"));
-    emailInput.click();
-    emailInput.sendKeys(email);
+    return new TheNewPage(getWebDriver());
+  }
 
-    WebElement passwordInput = driver.findElement(By.id("ember14"));
-    passwordInput.click();
-    passwordInput.sendKeys(password);
 
-    WebElement Login = driver.findElement(By.className("fde-floating-box_submit"));
+
+  public void clickLoginButton() {
+    WebElement Login = getWebDriver().findElement(LOGIN_BUTTON);
     Login.click();
-    return new TheNewPage(driver);
   }
 }
