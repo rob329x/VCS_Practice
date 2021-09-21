@@ -1,42 +1,33 @@
-import logintest.TheNewPage;
-import org.junit.jupiter.api.Test;
-import logintest.Login_Test;
-import logintest.FoodieLoginPage;
-import org.openqa.selenium.WebDriver;
-
 import java.util.Scanner;
+import logintest.DataInitializer;
+import logintest.FoodieLoginPage;
+import org.junit.jupiter.api.Test;
 
-public class FoodieTest {
+public class FoodieTest extends TestBase {
 
   @Test
   public void canLogin() {
-    Login_Test first_login = new Login_Test();
+    DataInitializer dataInit = new DataInitializer();
 
     Scanner myScanner = new Scanner(System.in);
-    String email = first_login.getEmail(myScanner);
-    String password = first_login.getPassword(myScanner);
+    String email = dataInit.getEmail(myScanner);
+    String password = dataInit.getPassword(myScanner);
 
-    WebDriver foodieDriver = first_login.createDriver();
-
-    FoodieLoginPage newLogin = new FoodieLoginPage(foodieDriver);
-    newLogin.login(email,password);
-
+    FoodieLoginPage newLogin = new FoodieLoginPage(getWebDriver());
+    newLogin.login(email, password);
   }
 
   @Test
-  public void viewProfile(){
+  public void viewProfile() {
     Scanner myScanner = new Scanner(System.in);
-    Login_Test first_login = new Login_Test();
+    DataInitializer first_login = new DataInitializer();
 
     String email = first_login.getEmail(myScanner);
     String password = first_login.getPassword(myScanner);
 
-    WebDriver foodieDriver = first_login.createDriver();
-
-    FoodieLoginPage newLogin = new FoodieLoginPage(foodieDriver);
-    TheNewPage profile = newLogin.login(email,password);
-
-    profile.clickOnProfile();
-
+    FoodieLoginPage foodiePage = new FoodieLoginPage(getWebDriver());
+    foodiePage.go()
+        .login(email, password)
+        .clickOnProfile();
   }
 }
