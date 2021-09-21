@@ -4,11 +4,11 @@ import java.util.Scanner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Login_Test {
+public class DataInitializer {
 
-  public static WebDriver createDriver() {
-    System.setProperty("webdriver.chrome.driver",
-        "/Users/robertbolt/Desktop/Useful Tools/chromedriver");
+  private static WebDriver createDriver() {
+//    System.setProperty("webdriver.chrome.driver",
+//        "/Users/robertbolt/Desktop/Useful Tools/chromedriver");
     WebDriver driver = new ChromeDriver();
 
     return driver;
