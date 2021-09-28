@@ -1,19 +1,31 @@
 package logintest;
 
+import static logintest.ConfigManager.getLoadedProperties;
+
 import java.util.Scanner;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DataInitializer {
 
-  private static WebDriver createDriver() {
-//    System.setProperty("webdriver.chrome.driver",
-//        "/Users/robertbolt/Desktop/Useful Tools/chromedriver");
-    WebDriver driver = new ChromeDriver();
+  private static final String EMAIL = "EMAIL";
+  private static final String PASSWORD = "PASSWORD";
 
-    return driver;
+  public static String getEmail() {
+    return getLoadedProperties().getProperty(EMAIL);
   }
 
+  public static String getPassword() {
+    return getLoadedProperties().getProperty(PASSWORD);
+  }
+
+  /**
+   * @deprecated
+   * this method sucks and we did a better thing.  Use `getEmail()` instead!
+   *
+   * This is a method that gets email from the console.
+   * @param myScanner
+   * @return
+   */
+  @Deprecated
   public static String getEmail(Scanner myScanner) {
     System.out.println("Enter email");
     String email = myScanner.nextLine();  // Read user email
@@ -28,20 +40,5 @@ public class DataInitializer {
     System.out.println("Password is: " + password);  // Output user password
 
     return password;
-  }
-
-  public static void main(String[] args) throws InterruptedException {
-
-    Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
-    String email = getEmail(myScanner);
-    String password = getPassword(myScanner);
-
-    WebDriver driver = createDriver();
-
-    FoodieLoginPage foodiePage = new FoodieLoginPage(driver);
-    TheNewPage theNewPage = foodiePage.login(email, password);
-    theNewPage.clickOnProfile();
-
-    driver.quit();
   }
 }
