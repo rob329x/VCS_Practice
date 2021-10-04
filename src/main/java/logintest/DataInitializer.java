@@ -2,6 +2,7 @@ package logintest;
 
 import static logintest.ConfigManager.getLoadedProperties;
 
+import java.util.Base64;
 import java.util.Scanner;
 
 public class DataInitializer {
@@ -10,11 +11,18 @@ public class DataInitializer {
   private static final String PASSWORD = "PASSWORD";
 
   public static String getEmail() {
-    return getLoadedProperties().getProperty(EMAIL);
+    return Decrypt(getLoadedProperties().getProperty(EMAIL));
+
   }
 
   public static String getPassword() {
-    return getLoadedProperties().getProperty(PASSWORD);
+    return Decrypt(getLoadedProperties().getProperty(PASSWORD));
+  }
+
+  public static String Decrypt (String encodedText){
+    Base64.Decoder decoder = Base64.getDecoder();
+    byte[] decodedByteArray = decoder.decode(encodedText);
+    return new String(decodedByteArray);
   }
 
   /**
