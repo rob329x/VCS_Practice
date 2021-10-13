@@ -21,15 +21,13 @@ public class FoodieLoginPage extends BasePage{
     return new FoodieLoginPage(getWebDriver());
   }
 
-  public TheNewPage login(String email, String password) {
+  public FoodieHomePage login(String email, String password) {
     enterText(EMAIL_INPUT_FIELD, email);
     enterText(PASSWORD_INPUT_FIELD, password);
     clickLoginButton();
 
-    return new TheNewPage(getWebDriver());
+    return new FoodieHomePage(getWebDriver());
   }
-
-
 
   public void clickLoginButton() {
     WebElement Login = getWebDriver().findElement(LOGIN_BUTTON);

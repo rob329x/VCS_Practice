@@ -18,7 +18,7 @@ public class TestBase {
     this.driver = createDriver();
   }
 
-  @AfterEach
+  //@AfterEach
   public void cleanup() {
     getWebDriver().quit();
   }
