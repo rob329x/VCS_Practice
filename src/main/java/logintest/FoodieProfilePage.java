@@ -8,28 +8,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class FoodieProfilePage {
+public class FoodieProfilePage extends BasePage{
 
-    private final WebDriver driver;
+    private static final By ALLERGY = By.xpath("//*[@class='rd-ui-button rd-ui-button_primary rd-ui-button_small rd-planning-eater-profile-display-value__edit-button text']");
+    private static final By PROFILE_LOGOUT = By.xpath("//*[@class='rd-ui-button rd-ui-button_primary rd-ui-button_small rd-planning-eater-profile-display-value__edit-button text']");
+
 
     public FoodieProfilePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void clickAddAllergy() {
-        WebDriverWait block = new WebDriverWait(driver,
-                10); //Wait for next page to load and navigate ot the profile section
-        block.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='rd-ui-button rd-ui-button_primary rd-ui-button_small rd-planning-eater-profile-display-value__edit-button text']")));
-        WebElement allergy = driver.findElement(By.xpath("//*[@class='rd-ui-button rd-ui-button_primary rd-ui-button_small rd-planning-eater-profile-display-value__edit-button text']"));
-        allergy.click();
+        waitToClick(ALLERGY);
     }
 
     public void clickProfileLogout(){
-        WebDriverWait block = new WebDriverWait(driver,
-                10); //Wait for next page to load and navigate ot the profile section
-        block.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='rd-ui-button rd-ui-button_primary rd-ui-button_small rd-planning-eater-profile-display-value__edit-button text']")));
-        WebElement logout = driver.findElement(By.xpath("//*[@class='rd-ui-button rd-ui-button_primary rd-ui-button_small rd-planning-eater-profile-display-value__edit-button text']"));
-        logout.click();
+        waitToClick(PROFILE_LOGOUT);
     }
 
 
